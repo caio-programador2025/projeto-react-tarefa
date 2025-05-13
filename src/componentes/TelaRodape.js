@@ -13,7 +13,7 @@ style={
     }
     }>
     <p>
-        Criado por: Caio Lauriano dos Santos
+        Criado por: Caio Lauriano dos Santos @ 2025
     </p>
 </footer>
 </>
