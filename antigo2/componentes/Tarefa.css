@@ -1,0 +1,18 @@
+    .tarefa-box{
+    background-color: lightcyan;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px
+}
+
+.grid-botoes{
+display: flex;
+  }
+
+  .botao-grid{
+  border: 1px solid aqua;
+  cursor: pointer;
+  }
+
+  
