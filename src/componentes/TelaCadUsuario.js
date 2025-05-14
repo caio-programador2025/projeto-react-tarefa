@@ -10,8 +10,7 @@ navigate("/")
 }
 return(
     <div className="box">
-        <h1>App - Gestão de Tarefas</h1>
-        <h2> Tela de Cadastro de Usuario.</h2>
+        <h4> Tela de Cadastro de Usuario.</h4>
         <div style={{color:"red"}}>
 {erro? <p aria-label="mensagem de erro">{erro}</p>
 :null}
