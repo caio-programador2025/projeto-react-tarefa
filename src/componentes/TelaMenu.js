@@ -42,7 +42,7 @@ return(
     <li>
 
         <a href="#!" className="sidenav-close">
-<i className="material-icons" aria-label="fechar menu">close</i>
+<i className="material-icons" aria-label="fechar menu" translate="no">close</i>
 
         </a>
     </li>
