@@ -32,9 +32,9 @@ return(
         style={tarefa.finalizada?{borderLeft:"6px solid green"}:{borderLeft: "6px solid red"}}
         aria-label={tarefa.finalizada?"Tarefa concluída. ":"Tarefa não concluída."}
         >
-            <h1>
+            <p style={{textAlign: "left", width:"100%"}}>
                 {tarefa.titulo}
-            </h1>
+            </p>
             <div className="grid-botoes">
                 <button
                 aria-label="detalhes" 
