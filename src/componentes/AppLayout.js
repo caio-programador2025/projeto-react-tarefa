@@ -3,7 +3,7 @@ import TelaMenu from "./TelaMenu";
 import { Outlet } from "react-router-dom";
 import TelaRodape from "./TelaRodape";
 const AppLayout = ()=>{
-  return(
+    return(
 <>
 <div>
     <TelaMenu></TelaMenu>

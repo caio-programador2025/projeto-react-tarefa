@@ -1,27 +1,29 @@
 import React from "react";
 import "./Tarefa.css";
 import FormCadTarefa from "./FormCadTarefa";
-import useTarefa from "../hooks/useTarefa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
+import useTarefa from "../hooks/useTarefa";
+import useTarefafirebase from "../hooks/useTarefa-firebase";
 
 const TelaTarefas = () =>{
 
-const {adicionar_tarefa, listaTarefas, exibir_detalhe_tarefa, excluir_tarefa} = useTarefa()
+//const {adicionar_tarefa, listaTarefas, exibir_detalhe_tarefa, excluir_tarefa, usuario} = useTarefa()
 
+const {
+    adicionar_tarefa, usuario, listaTarefas, exibir_detalhe_tarefa,excluir_tarefa, alterar_tarefa
+} = useTarefafirebase()
 return(
     <>
-    <h1 
+    <h4
     style={{textAlign:"center"}}
     tabIndex={1}
     >
-        Minhas Tarefas
-        </h1>
+        Minhas Tarefas  -  {usuario.email}
+        </h4>
     <div className="box">
         <FormCadTarefa 
-        adicionar_tarefa={adicionar_tarefa}
-        >
-        </FormCadTarefa>
+        adicionar_tarefa={adicionar_tarefa} />
         {
             listaTarefas.length==0?(<p>Nenhuma tarefa cadastrada.</p>):
         listaTarefas.map(tarefa => 
@@ -32,9 +34,9 @@ return(
         style={tarefa.finalizada?{borderLeft:"6px solid green"}:{borderLeft: "6px solid red"}}
         aria-label={tarefa.finalizada?"Tarefa concluída. ":"Tarefa não concluída."}
         >
-            <p style={{textAlign: "left", width:"100%"}}>
+            <h1>
                 {tarefa.titulo}
-            </p>
+            </h1>
             <div className="grid-botoes">
                 <button
                 aria-label="detalhes" 

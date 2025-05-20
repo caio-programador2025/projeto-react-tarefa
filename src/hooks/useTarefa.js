@@ -10,45 +10,42 @@ const [tarefa, setTarefa] = useState(
     finalizada: false
 }    
 )
-
 const auth = getAuth()
 const usuario = auth.currentUser
 
 const [listaTarefas, setListaTarefas] = useState(
     () =>{
         const listaTarefas_storage = localStorage.getItem("listaTarefas")
-    const todasTarefas = listaTarefas_storage?JSON.parse(listaTarefas_storage):[]
-    return todasTarefas.filter(tarefa => tarefa.uid == usuario.uid)
+        const todasTarefas = listaTarefas_storage?JSON.parse(listaTarefas_storage):[]
+        return todasTarefas.filter(tarefa => tarefa.uid === usuario.uid)
     }
 )
 
-
-
 useEffect(
     () =>{
-//rcupera a lista completa de tarefas armazenadas
+        //Recupera lista completa de tarefas armazenada
+        const listaTarefas_storage = localStorage.getItem("listaTarefas")
+        const tarefasTodosUsuarios= listaTarefas_storage?JSON.parse(listaTarefas_storage):[]
 
-const listaTarefas_storage = localStorage.getItem("listaTarefas")
-const tarefasTodosUsuarios = listaTarefas_storage?JSON.parse(listaTarefas_storage):[]
+        //Recupera tarefa dos outros usuários
+        const tarefasOutrosUsuarios = tarefasTodosUsuarios.filter(tarefa => tarefa.uid !== usuario.uid)
 
-//recupera tarefas de outros usuarios
+        //Unir tarefas com o usuário atual com as tarefas de outros usuários
+        const novaListaTarefas = [
+            ...tarefasOutrosUsuarios, ...listaTarefas
+        ]
 
-const tarefasOutrUsusuarios = tarefasTodosUsuarios.filter(tarefa => tarefa.uid !== usuario.uid)
-
-// unir tarefas do usuario atual com as tarefas de outros usuarios
-
-const novaListaTarefa = [...tarefasOutrUsusuarios, ...listaTarefas]
-// armazenar nova lista no local storage
-
-localStorage.setItem("listaTarefas", JSON.stringify(novaListaTarefa))
-    })
+        //Armazenar nova lista no local storage
+        localStorage.setItem("listaTarefas", JSON.stringify(novaListaTarefas))
+    }, [listaTarefas]
+)
 
 const adicionar_tarefa = (titulo) =>{
 const novaTarefa = 
    {
 id: Math.floor(Math.random()*1000)+1,
 titulo: titulo,
-finalizada: false, 
+finalizada: false,
 uid: usuario.uid
 }
 const novaListaTarefas = [...listaTarefas, novaTarefa]
