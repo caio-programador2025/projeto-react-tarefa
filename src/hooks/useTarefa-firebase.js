@@ -38,7 +38,7 @@ const colecao_Tarefa = collection(db, "tarefas")
 
     useEffect( () => {
         buscaTarefas() 
-    },[usuario, listaTarefas])
+    },[usuario ])
 
 
     // Função adicionar uma nova tarefa no firebase//
@@ -50,13 +50,6 @@ uid: usuario.uid
 }
 try {
     const novoRegistro = await addDoc(collection(db, "tarefas"), novaTarefa)
-    //atualizando a nova lista de tarefas//
-    const novaListaTarefa = [...listaTarefas,
-        {id: novoRegistro.id,
-            ...novaTarefa
-        }
-     ]
-     setListaTarefas(novaListaTarefa)
      alert ("Tarefa Adicionada com sucesso")
 
 } catch (error) {
@@ -73,8 +66,10 @@ try {
     const excluir_tarefa = async(id) => {
 try {
     await deleteDoc(doc(db, "tarefas" , id))
-setListaTarefas(listaTarefas.filter(tarefa => tarefa.id !== id))
-  alert ("tareffa excluida com sucesso")  
+
+    buscaTarefas()
+
+    alert ("tareffa excluida com sucesso")  
 } catch (error) {
     alert("tarefa nao encontrada" + error)
 }
@@ -90,12 +85,7 @@ try {
         finalizada: tarefa_editada.finalizada
     }
     )
-    //autaliza a tarefa na lista localmente
-    
-    const novalistatarefas = listaTarefas.map (tarefa =>
-        tarefa.id == tarefa_editada.id? tarefa_editada: tarefa
-    )
-    setListaTarefas(novalistatarefas)
+    buscaTarefas()
     alert(" Tarefa alterada com sucesso:")
 } catch (error) {
     alert("Erro ao alterar tarefa:")
