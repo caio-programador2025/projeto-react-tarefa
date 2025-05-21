@@ -38,7 +38,7 @@ const colecao_Tarefa = collection(db, "tarefas")
 
     useEffect( () => {
         buscaTarefas() 
-    },[usuario])
+    },[usuario, listaTarefas])
 
 
     // Função adicionar uma nova tarefa no firebase//
